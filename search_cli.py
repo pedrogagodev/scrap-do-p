@@ -23,9 +23,11 @@ def main():
         print(f"\nFound {count} results for term: '{search_term}'\n")
         
         if count > 0:
-            # Print Name and Label for terminal clarity
-            # We use to_string to ensure all selected rows are shown without truncation
-            print(results[['Name', 'Label']].to_string(index=False))
+            # Display all columns. Using to_string() without explicit column selection.
+            # We also set the max width to handle long descriptions.
+            pd.set_option('display.max_colwidth', None)
+            pd.set_option('display.width', 1000)
+            print(results.to_string(index=False))
         
     except Exception as e:
         print(f"Error: {e}")
